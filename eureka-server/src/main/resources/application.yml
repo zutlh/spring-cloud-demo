@@ -1,0 +1,17 @@
+server:
+  port: 9000
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false #是否将自己注册到注册中心
+    fetch-registry: false #是否要从eureka中获取注册信息
+    service-url: #配置暴露给Eureka Client的请求地址
+      defalutZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?userUnicode=true&characterEncoding=utf-8
+    username: root
+    password: liuhao123
