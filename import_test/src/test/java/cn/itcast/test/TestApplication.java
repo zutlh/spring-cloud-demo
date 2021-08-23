@@ -13,7 +13,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 @EnableUserBean
 public class TestApplication {
     /**
-     *
+     * -->EnableUserBean -->UserImportSelector -->UserConfiguration -->User
      * @param args
      */
     public static void main(String[] args) {
