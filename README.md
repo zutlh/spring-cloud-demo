@@ -1,7 +1,7 @@
 # spring-cloud-demo
 ## 用来了解SpringCloud架构的小应用
 
-##@Retention注解作用
+## @Retention注解作用
 @Retention作用是定义被它所注解的注解保留多久，一共有三种策略，定义在RetentionPolicy枚举中.
 
 从注释上看：
