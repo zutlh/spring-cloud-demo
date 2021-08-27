@@ -1,5 +1,6 @@
 package cn.itcast.order.controller;
 
+import cn.itcast.order.feign.ProductFeignClient;
 import cn.itcast.product.entity.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,18 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private ProductFeignClient productFeignClient;
+
+    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+    public Product findById(@PathVariable Long id){
+
+
+        Product product = null;
+        product = productFeignClient.findById(id);
+        return product;
+    }
+
     /**
      * 基于Ribbon的形式调用远程的微服务
      * 1、使用@loadbalacned声明RestTemplate
@@ -42,14 +55,14 @@ public class OrderController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
-    public Product findById(@PathVariable Long id){
-
-
-        Product product = null;
-        product = restTemplate.getForObject("http://product-service/product/"+id,Product.class);
-        return product;
-    }
+//    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+//    public Product findById(@PathVariable Long id){
+//
+//
+//        Product product = null;
+//        product = restTemplate.getForObject("http://product-service/product/"+id,Product.class);
+//        return product;
+//    }
 
     /**
      * 参数：商品id

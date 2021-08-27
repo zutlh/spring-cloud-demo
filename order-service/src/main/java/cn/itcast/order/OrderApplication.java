@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +17,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EntityScan("cn.itcast.order.entity")
 @EnableEurekaClient
+//激活feign
+@EnableFeignClients
 public class OrderApplication {
     /**
      * 使用spring提供的RestTemplate发送http请求到商品服务
