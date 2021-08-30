@@ -1,6 +1,5 @@
 package cn.itcast.order.controller;
 
-import cn.itcast.order.command.OrderCommand;
 import cn.itcast.order.feign.ProductFeignClient;
 import cn.itcast.product.entity.Product;
 
@@ -25,28 +24,43 @@ import java.util.List;
 public class OrderController {
 
 
+    /**
+     * 注入DiscoveryClient
+     * springcloud提供的获取元数据的工具类
+     *  调用方法获取服务的元数据信息
+     */
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+
     @Autowired
     private RestTemplate restTemplate;
 
 
+//    @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
+//    public Product findById(@PathVariable Long id){
+//
+//
+//        Product product = null;
+//        product = productFeignClient.findById(id);
+//        return product;
+//    }
+
     /**
-     * 使用orderCommand调用远程服务
+     * 基于Ribbon的形式调用远程的微服务
+     * 1、使用@loadbalacned声明RestTemplate
+     * 2、使用服务名称替换ip地址
      * @param id
      * @return
      */
     @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
-//        Product product = new Product();
-//        product = restTemplate.getForObject("http://localhost:9001/product/" + id, Product.class);
-//        return product;
-        return new OrderCommand(restTemplate,id).execute();
-    }
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public String findOrder(@PathVariable Long id){
-        System.out.println(Thread.currentThread().getName());
-        return "根据ID查询订单";
-    }
 
+
+        Product product = null;
+        product = restTemplate.getForObject("http://product-service/product/"+id,Product.class);
+        return product;
+    }
 
     /**
      * 参数：商品id

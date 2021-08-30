@@ -17,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EntityScan("cn.itcast.order.entity")
 @EnableEurekaClient
-public class OrderApplication {
+//激活feign
+@EnableFeignClients
+public class FeignOrderApplication {
     /**
      * 使用spring提供的RestTemplate发送http请求到商品服务
      * 1.创建RestTemplate对象交给容器管理
@@ -27,11 +29,12 @@ public class OrderApplication {
      */
 
     @Bean
+    @LoadBalanced //开启负载均衡功能
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderApplication.class,args);
+        SpringApplication.run(FeignOrderApplication.class,args);
     }
 }

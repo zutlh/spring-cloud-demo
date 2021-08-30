@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>order-service</artifactId>
+    <artifactId>order-service-feign</artifactId>
 
     <dependencies>
         <dependency>
@@ -40,17 +40,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
             <version>1.4.6.RELEASE</version>
-        </dependency><!-- https://mvnrepository.com/artifact/com.netflix.hystrix/hystrix-metrics-event-stream -->
-        <dependency>
-            <groupId>com.netflix.hystrix</groupId>
-            <artifactId>hystrix-metrics-event-stream</artifactId>
-            <version>1.5.18</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.netflix.hystrix/hystrix-javanica -->
-        <dependency>
-            <groupId>com.netflix.hystrix</groupId>
-            <artifactId>hystrix-javanica</artifactId>
-            <version>1.5.18</version>
         </dependency>
 
 

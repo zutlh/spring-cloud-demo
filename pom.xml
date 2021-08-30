@@ -13,6 +13,8 @@
         <module>order-service</module>
         <module>eureka-server</module>
         <module>import_test</module>
+        <module>order-service-feign</module>
+        <module>order-service-rest</module>
     </modules>
 
     <parent>
