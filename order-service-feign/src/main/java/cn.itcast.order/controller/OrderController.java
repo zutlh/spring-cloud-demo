@@ -29,8 +29,6 @@ public class OrderController {
 
     @RequestMapping(value = "/buy/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
-
-
         Product product = null;
         product = productFeignClient.findById(id);
         return product;

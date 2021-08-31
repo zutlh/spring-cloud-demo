@@ -3,8 +3,10 @@ package cn.itcast.order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EntityScan("cn.itcast.order.entity")
 @EnableEurekaClient
+//激活Hystrix
+@EnableCircuitBreaker
 public class RestOrderApplication {
     /**
      * 使用spring提供的RestTemplate发送http请求到商品服务

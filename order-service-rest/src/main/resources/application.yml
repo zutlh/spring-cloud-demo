@@ -19,14 +19,14 @@ eureka:
   instance:
     prefer-ip-address: true # 使用ip地址注册
 # 修改ribbon的负载均衡策略  服务名 - ribbon - NFLoadBalancerRuleClassName : 策略
-product-service:
-  ribbon:
-#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-    ConnectTimeout: 250 # Ribbon的连接超时时间
-    ReadTimeout: 1000 # Ribbon的数据读取超时时间
-    OkToRetryOnAllOperation: true # 是否对所有操作都进行重试
-    MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
-    MaxAutoRetries: 1 # 对当前实例的重试次数
+#product-service:
+#  ribbon:
+##    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#    ConnectTimeout: 250 # Ribbon的连接超时时间
+#    ReadTimeout: 1000 # Ribbon的数据读取超时时间
+#    OkToRetryOnAllOperation: true # 是否对所有操作都进行重试
+#    MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
+#    MaxAutoRetries: 1 # 对当前实例的重试次数
 #配置Feign日志的输出
 #日志配置 NONE:不输出日志(性能最高)  BASIC:适用于生产环境追踪问题 HEADERS: 在BASIC的基础上，记录请求和响应头信息
 # FULL: 记录所有
@@ -38,3 +38,17 @@ feign:
 logging:
   level:
     cn.itcast.order.feign.ProductFeignClient: debug
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInmilliseconds: 3000 #默认的连接超时时间1秒，若1秒没有返回数据，自动的触发降级方法
+          timeout:
+            enabled: true #必须设置true，否则会交给Ribbon
+    serverMethod:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000

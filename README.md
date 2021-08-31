@@ -24,4 +24,8 @@ runtime：注解不仅被保存到class文件中，jvm加载class文件之后，
 @Target(ElementType.LOCAL_VARIABLE)——局部变量
 @Target(ElementType.ANNOTATION_TYPE)——注解
 @Target(ElementType.PACKAGE)——包
-##
+
+## 问题
+order-service-feign
+order-service-rest
+获取不到product-service服务，报503 Service Unavailable] with root cause
