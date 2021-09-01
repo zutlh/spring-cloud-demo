@@ -3,6 +3,7 @@ package cn.itcast.order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -19,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 //激活feign
 @EnableFeignClients
+//激活hystrix
+@EnableCircuitBreaker
 public class FeignOrderApplication {
     /**
      * 使用spring提供的RestTemplate发送http请求到商品服务
@@ -29,7 +32,7 @@ public class FeignOrderApplication {
      */
 
     @Bean
-    @LoadBalanced //开启负载均衡功能
+//    @LoadBalanced //开启负载均衡功能
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }

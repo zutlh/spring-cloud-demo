@@ -27,11 +27,6 @@ public class ProductController {
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public Product findById(@PathVariable Long id){
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Product product = productService.findById(id);
         product.setProductName("访问的服务地址"+ip+":"+port);
         return product;

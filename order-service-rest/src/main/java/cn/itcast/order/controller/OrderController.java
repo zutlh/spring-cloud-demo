@@ -2,6 +2,7 @@ package cn.itcast.order.controller;
 
 import cn.itcast.product.entity.Product;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/order")
+/**
+ * @DefaultProperties: 指定此接口中公共的熔断设置
+ * 如果在@DefaultProperties指定了公共的降级方法
+ * 在@HystrixCommand不需要单独指定了
+ */
+@DefaultProperties(defaultFallback = "defaultFallback")
 public class OrderController {
 
     @Autowired
@@ -43,11 +50,20 @@ public class OrderController {
      * @param id
      * @return
      */
-//    @HystrixCommand(fallbackMethod = "orderFallback")
+    @HystrixCommand
     @RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
     public Product findById(@PathVariable Long id) {
         Product product = null;
         product = restTemplate.getForObject("http://product-service/product/" + id, Product.class);
+        return product;
+    }
+    /**
+     * 指定统一降级方法
+     *  参数：没有参数
+     */
+    public Product defaultFallback(){
+        Product product = new Product();
+        product.setProductName("触发统一的降级方法");
         return product;
     }
 

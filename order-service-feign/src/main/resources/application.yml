@@ -35,6 +35,23 @@ feign:
     config:
       product-service: # 需要调用的服务名称
         loggerLevel: FULL
+  hystrix:
+    enabled: true
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInmilliseconds: 3000 #默认的连接超时时间1秒，若1秒没有返回数据，自动的触发降级方法
+            timeout:
+              enabled: true #必须设置true，否则会交给Ribbon
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 logging:
   level:
     cn.itcast.order.feign.ProductFeignClient: debug
+

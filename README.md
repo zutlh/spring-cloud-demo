@@ -29,3 +29,4 @@ runtime：注解不仅被保存到class文件中，jvm加载class文件之后，
 order-service-feign
 order-service-rest
 获取不到product-service服务，报503 Service Unavailable] with root cause
+已解决：@LoadBalanced问题，重新注入一下@LoadBalanced解决了。
