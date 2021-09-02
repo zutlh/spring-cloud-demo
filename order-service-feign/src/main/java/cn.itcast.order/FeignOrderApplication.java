@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 //激活hystrix
 @EnableCircuitBreaker
+//激活hystrix的web监控平台
+@EnableHystrixDashboard
 public class FeignOrderApplication {
     /**
      * 使用spring提供的RestTemplate发送http请求到商品服务
