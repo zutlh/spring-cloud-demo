@@ -11,5 +11,5 @@ eureka:
     prefer-ip-address: true # 使用ip地址注册
 turbine:
   # 要监控的微服务列表，多个用，分隔
-  appConfig: feign-order-service
+  appConfig: rest-order-service,feign-order-service
   clusterNameExpression: "'default'"
