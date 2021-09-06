@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  tomcat:
+    max-threads: 10
+spring:
+  application:
+    name: zuul-server
+
+# 路由配置
+zuul:
+  routes:
+    # 以商品微服务举例
+#    product-service: # 路由id，随便写
+#      path: /product-service/** # 映射路径  #localhost:8080/product-service/dadsawdadw
+##      url: http://localhost:9001 #映射路径对应的实际微服务url地址
+#      serviceId: product-service # 配置转发的微服务的名称
+      # 如果路由id和对应的微服务的serviceId一致的话
+      product-service: /product-service/**
+      # zuul中的默认路由配置
+      # 如果当前的微服务名称为 service-product，默认的请求映射路径 /service-product/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+  instance:
+    prefer-ip-address: true # 使用ip地址注册

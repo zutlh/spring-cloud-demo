@@ -21,9 +21,9 @@ eureka:
 # 修改ribbon的负载均衡策略  服务名 - ribbon - NFLoadBalancerRuleClassName : 策略
 product-service:
   ribbon:
-#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-    ConnectTimeout: 25000 # Ribbon的连接超时时间
-    ReadTimeout: 10000 # Ribbon的数据读取超时时间
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    ConnectTimeout: 5000 # Ribbon的连接超时时间
+    ReadTimeout: 5000 # Ribbon的数据读取超时时间
     OkToRetryOnAllOperation: true # 是否对所有操作都进行重试
     MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
     MaxAutoRetries: 1 # 对当前实例的重试次数
@@ -35,16 +35,16 @@ feign:
     config:
       product-service: # 需要调用的服务名称
         loggerLevel: FULL
-  hystrix:
-    enabled: true
-    command:
-      default:
-        execution:
-          isolation:
-            thread:
-              timeoutInmilliseconds: 3000 #默认的连接超时时间1秒，若1秒没有返回数据，自动的触发降级方法
-            timeout:
-              enabled: true #必须设置true，否则会交给Ribbon
+hystrix:
+  enabled: true
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInmilliseconds: 3000 #默认的连接超时时间1秒，若1秒没有返回数据，自动的触发降级方法
+          timeout:
+            enabled: true #必须设置true，否则会交给Ribbon
 management:
   endpoints:
     web:
