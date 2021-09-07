@@ -1,8 +1,12 @@
 package cn.itcast.zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.apache.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @program: IntelliJ IDEA
@@ -51,13 +55,24 @@ public class LoginFilter extends ZuulFilter {
      *  4、判断token是否为空
      *  4.1、token==null：身份验证失败
      *  4.2、token!=null：执行后续操作
+     *  在zuul网关中，通过RequestContext的上下文对象,可以获取对象request
      *
      * @return
      * @throws ZuulException
      */
     @Override
     public Object run() throws ZuulException {
-
+        // 1、获取zuul提供的上下文对象RequestContext
+        RequestContext context = RequestContext.getCurrentContext();
+        // 2、从RequestContext中获取request
+        HttpServletRequest request = context.getRequest();
+        // 3、获取请求参数access-token
+        String token = request.getParameter("access-token");
+        // 4、判断
+        if (token == null){
+            context.setSendZuulResponse(false);//拦截请求
+            context.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
+        }
         return null;
     }
 }

@@ -17,6 +17,7 @@
         <module>order-service-rest</module>
         <module>hystrix-turbine</module>
         <module>zuul-server</module>
+        <module>gateway-service</module>
     </modules>
 
     <parent>
@@ -31,11 +32,7 @@
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.5.3</version>
-        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging -->
         <dependency>
